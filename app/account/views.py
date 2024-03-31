@@ -26,6 +26,3 @@ class MyProfileAPIView(generics.GenericAPIView):
         return Response(serializer.data)
 
 
-
-
-
