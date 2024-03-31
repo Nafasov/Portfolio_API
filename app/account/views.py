@@ -21,7 +21,7 @@ class MyProfileAPIView(generics.GenericAPIView):
 
     def get(self, request, *args, **kwargs):
         user_id = request.user.id
-        user = User.objects.get(user_id=user_id)
+        user = User.objects.get(id=user_id)
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
