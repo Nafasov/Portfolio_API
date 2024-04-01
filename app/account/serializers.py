@@ -15,7 +15,8 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'email', 'avatar', 'last_name', 'first_name', 'password', 'password2', 'created_date']
 
-    def validate_email(self, attrs):
+    def validate(self, attrs):
+        print(attrs)
         password = attrs.get('password')
         password2 = attrs.get('password2')
 
@@ -26,6 +27,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         password = validated_data.pop('password')
         password2 = validated_data.pop('password2')
+        print(validated_data)
         user = User.objects.create_user(**validated_data)
         user.set_password(password)
         user.save()

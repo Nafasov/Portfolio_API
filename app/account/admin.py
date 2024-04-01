@@ -28,4 +28,3 @@ class UserAdmin(BaseUserAdmin):
     filter_horizontal = ('groups', 'user_permissions')
     list_editable = ('is_active', 'is_staff', 'is_superuser')
     ordering = ()
-
