@@ -24,5 +24,3 @@ class MyProfileAPIView(generics.GenericAPIView):
         user = User.objects.get(id=user_id)
         serializer = UserSerializer(user)
         return Response(serializer.data)
-
-
