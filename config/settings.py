@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'drf_yasg',
 
+    'phonenumber_field',
+
     'app.account',
     'app.article',
     'app.main'
