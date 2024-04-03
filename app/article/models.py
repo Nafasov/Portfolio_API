@@ -44,8 +44,9 @@ class SubArticle(models.Model):
         return self.title
 
 
-class Comment(models.Model):
+class ArticleComment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='author')
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='parents')
     top_level_comment_id = models.IntegerField(null=True, blank=True)
     message = models.TextField()
@@ -54,7 +55,7 @@ class Comment(models.Model):
     @property
     def children(self):
         if not self.parent:
-            return Comment.objects.filter(top_level_comment_id=self.id)
+            return ArticleComment.objects.filter(top_level_comment_id=self.id)
         return None
 
 
@@ -74,4 +75,4 @@ def pre_save_comments(sender, instance, *args, **kwargs):
             instance.top_level_comment_id = instance.parent.id
 
 
-pre_save.connect(pre_save_comments, sender=Comment)
+pre_save.connect(pre_save_comments, sender=ArticleComment)

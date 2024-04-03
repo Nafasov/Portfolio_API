@@ -43,5 +43,8 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
-    path('account/', include('app.account.urls', namespace='account'))
+    path('account/', include('app.account.urls', namespace='account')),
+    path('article/', include('app.article.urls', namespace='article')),
+    path('home/', include('app.main.urls', namespace='main')),
+    path('contact/', include('app.contact.urls', namespace='contact'))
 ]

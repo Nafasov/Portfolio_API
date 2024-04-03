@@ -1,9 +1,8 @@
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
 
 
-class Occupation(models.Model):
-    title = models.CharField(max_length=25)
+class Profession(models.Model):
+    title = models.CharField(max_length=55)
 
     def __str__(self):
         return self.title
@@ -12,14 +11,15 @@ class Occupation(models.Model):
 class AboutMe(models.Model):
     name = models.CharField(max_length=255)
     image = models.ImageField(upload_to='main/about', null=True, blank=True)
-    date = models.DateField()
+    birthday = models.DateField()
     address = models.TextField(max_length=300)
     zip_code = models.IntegerField(null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
-    phone = PhoneNumberField(blank=True, help_text='Please enter your phone number')
+    phone = models.IntegerField(blank=True, help_text='Please enter your phone number')
     project_complete = models.IntegerField(default=0)
     cvv = models.FileField(upload_to='main/cvv')
     created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -32,16 +32,16 @@ class Partner(models.Model):
 
 
 class Education(models.Model):
-    years = models.CharField(max_length=20)
-    name = models.CharField(max_length=255)
+    years = models.CharField(max_length=20, help_text="2002-2003")
+    title = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
     content = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
 
 
 class Experience(models.Model):
-    years = models.CharField(max_length=20)
-    name = models.CharField(max_length=255)
+    years = models.CharField(max_length=20, help_text="2002-2003")
+    title = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
     content = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
@@ -49,7 +49,7 @@ class Experience(models.Model):
 
 class Award(models.Model):
     years = models.CharField(max_length=20)
-    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     position = models.CharField(max_length=255)
     content = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
@@ -83,6 +83,7 @@ class Projects(models.Model):
     category = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='main/project')
     link = models.URLField(null=True, blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
@@ -100,20 +101,10 @@ class Done(models.Model):
 class MeContact(models.Model):
     address = models.CharField(max_length=255, null=True)
     image = models.ImageField(upload_to='main/contact')
-    number = PhoneNumberField(null=True, help_text='Please enter your phone number')
+    phone = models.IntegerField(null=True, help_text='Please enter your phone number')
     li_me = models.URLField(null=True, blank=True)
     email = models.EmailField(null=True, help_text='Please enter your email address')
     web_site = models.CharField(max_length=25)
     website = models.URLField(null=True, blank=True)
 
-
-class Contacts(models.Model):
-    name = models.CharField(max_length=255)
-    email = models.EmailField(null=True, blank=True)
-    subject = models.CharField(max_length=255)
-    message = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.name
 
