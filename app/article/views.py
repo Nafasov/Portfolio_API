@@ -42,7 +42,7 @@ class ArticleAPIView(viewsets.ModelViewSet):
         return self.serializer_post_class
 
 
-class SubArticleAPIView(viewsets.ModelViewSet):
+class SubArticleAPIView(generics.ListCreateAPIView):
     # article/{article_id}/subarticle/
     queryset = SubArticle.objects.all()
     serializer_class = SubArticleSerializer
