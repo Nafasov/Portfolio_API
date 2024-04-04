@@ -28,8 +28,7 @@ urlpatterns = [
     path('services/', ServicesAPIView.as_view()),
     path('projects/', ProjectsAPIView.as_view()),
     path('done/', DoneAPIView.as_view()),
-    path('mecontacts/', MeContactsAPIView)
-
+    path('mecontacts/', MeContactsAPIView.as_view())
 ]
 
 
