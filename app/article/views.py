@@ -1,4 +1,5 @@
 from rest_framework import viewsets, generics
+from rest_framework.pagination import PageNumberPagination
 
 from .permission import IsAuthorOrReadOnly
 
@@ -22,11 +23,13 @@ from .serializers import (
 class CategoryAPIView(generics.ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    pagination_class = None
 
 
 class TagAPIView(generics.ListAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+    pagination_class = None
 
 
 class ArticleAPIView(viewsets.ModelViewSet):
@@ -47,6 +50,7 @@ class SubArticleAPIView(generics.ListCreateAPIView):
     queryset = SubArticle.objects.all()
     serializer_class = SubArticleSerializer
     permission_classes = [IsAuthorOrReadOnly]
+    pagination_class = None
 
     def get_queryset(self):
         article_id = self.kwargs.get('article_id')
