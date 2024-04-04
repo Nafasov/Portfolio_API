@@ -46,7 +46,7 @@ class ArticlePOSTSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
-class SubArticlePOSTSerializer(serializers.ModelSerializer):
+class SubArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubArticle
         fields = ['id', 'title', 'image', 'content']
@@ -57,7 +57,7 @@ class SubArticlePOSTSerializer(serializers.ModelSerializer):
         return super().create(validated_data)
 
 
-class ArticleCommentPOSTSerializer(serializers.ModelSerializer):
+class ArticleCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = ArticleComment
         fields = ['id', 'parent', 'top_level_comment_id', 'message', 'created_date']
