@@ -58,10 +58,18 @@ class SubArticleSerializer(serializers.ModelSerializer):
 
 
 class ArticleCommentSerializer(serializers.ModelSerializer):
+    author = UserSerializer(read_only=True)
+
     class Meta:
         model = ArticleComment
-        fields = ['id', 'parent', 'top_level_comment_id', 'message', 'created_date']
-        red_only_field = ['created_date', 'top_level_comment_id']
+        fields = ['id', 'author', 'parent', 'top_level_comment_id', 'message', 'created_date']
+
+
+class ArticleCommentPOSTSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ArticleComment
+        fields = ['id', 'parent', 'message', 'created_date']
+        red_only_field = ['created_date']
 
     def create(self, validated_data):
         request = self.context['request']

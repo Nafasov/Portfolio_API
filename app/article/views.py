@@ -16,7 +16,8 @@ from .serializers import (
                     ArticleSerializer,
                     ArticlePOSTSerializer,
                     SubArticleSerializer,
-                    ArticleCommentSerializer
+                    ArticleCommentSerializer,
+                    ArticleCommentPOSTSerializer
                     )
 
 
@@ -68,7 +69,13 @@ class ArticleCommentAPIView(generics.ListCreateAPIView):
     # article/{article_id}/comment/
     queryset = ArticleComment.objects.all()
     serializer_class = ArticleCommentSerializer
+    serializer_post_class = ArticleCommentPOSTSerializer
     permission_classes = [IsAuthorOrReadOnly]
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return self.serializer_class
+        return self.serializer_post_class
 
     def get_queryset(self):
         qs = super().get_queryset()
